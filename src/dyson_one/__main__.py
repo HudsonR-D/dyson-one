@@ -9,6 +9,14 @@ from dyson_one.critic import run_critic
 from dyson_one.ingest import enrich_specs, fetch_close_approaches, fetch_nhats
 from dyson_one.ledger import write_snapshot
 from dyson_one.score import score_body
+from dyson_one.world import (
+    diff_worlds,
+    explain_row,
+    find_object,
+    load_budgets,
+    load_previous,
+    load_snapshot,
+)
 
 
 def merge_rows(nhats: list[dict], approaches: list[dict]) -> list[dict]:
@@ -22,16 +30,20 @@ def merge_rows(nhats: list[dict], approaches: list[dict]) -> list[dict]:
     return list(by_des.values())
 
 
-def run(out_dir: Path, *, limit: int, lookup: int, critic: bool) -> None:
+def observe(out_dir: Path, *, limit: int | None, lookup: int | None, critic: bool) -> None:
+    budgets = load_budgets()
+    nhats_limit = limit if limit is not None else int(budgets.get("nhats_limit") or 60)
+    cad_limit = int(budgets.get("cad_limit") or nhats_limit)
+    lookups = lookup if lookup is not None else int(budgets.get("sbdb_lookups") or 12)
     today = datetime.now(timezone.utc).date()
-    nhats = fetch_nhats(limit=limit)
+    nhats = fetch_nhats(limit=nhats_limit)
     approaches = fetch_close_approaches(
         date_min=today.isoformat(),
         date_max=(today + timedelta(days=1100)).isoformat(),
-        limit=limit,
+        limit=cad_limit,
     )
     rows = merge_rows(nhats, approaches)
-    enrich_specs(rows, max_lookup=lookup)
+    enrich_specs(rows, max_lookup=lookups)
 
     scores = []
     for row in rows:
@@ -50,19 +62,83 @@ def run(out_dir: Path, *, limit: int, lookup: int, critic: bool) -> None:
                 approach_au=row.get("approach_au"),
             )
         )
-    write_snapshot(out_dir, scores)
+    write_snapshot(out_dir, scores, budgets=budgets)
     if critic:
         run_critic(out_dir)
+
+
+def cmd_show(out_dir: Path) -> None:
+    snap = load_snapshot(out_dir)
+    brief = out_dir / "BRIEF.md"
+    print(brief.read_text(encoding="utf-8") if brief.exists() else snap.get("hash"))
+
+
+def cmd_explain(out_dir: Path, designation: str) -> None:
+    snap = load_snapshot(out_dir)
+    row = find_object(snap, designation)
+    if row is None:
+        raise SystemExit(f"not in snapshot: {designation}")
+    print(explain_row(row), end="")
+
+
+def cmd_gaps(out_dir: Path) -> None:
+    snap = load_snapshot(out_dir)
+    att = snap.get("attention") or {}
+    print(f"snapshot {snap.get('hash')}  n={snap.get('count')}")
+    for key in ("unknown_low_dv", "missing_approach", "high_water"):
+        print(f"{key}:")
+        for des in att.get(key) or []:
+            print(f"  {des}")
+
+
+def cmd_diff(out_dir: Path) -> None:
+    print(diff_worlds(load_snapshot(out_dir), load_previous(out_dir)), end="")
 
 
 def main() -> None:
     p = argparse.ArgumentParser(prog="dyson-one")
     p.add_argument("--out", type=Path, default=Path("data"))
-    p.add_argument("--limit", type=int, default=60)
-    p.add_argument("--lookup", type=int, default=12)
+    sub = p.add_subparsers(dest="cmd")
+
+    obs = sub.add_parser("observe", help="refresh the world from JPL")
+    obs.add_argument("--limit", type=int, default=None)
+    obs.add_argument("--lookup", type=int, default=None)
+    obs.add_argument("--critic", action="store_true")
+
+    sub.add_parser("show", help="print BRIEF.md")
+    ex = sub.add_parser("explain", help="expand optics for one designation")
+    ex.add_argument("designation")
+    sub.add_parser("gaps", help="print attention queues")
+    sub.add_parser("diff", help="latest vs previous snapshot")
+
+    p.add_argument("--limit", type=int, default=None)
+    p.add_argument("--lookup", type=int, default=None)
     p.add_argument("--critic", action="store_true")
+
     args = p.parse_args()
-    run(args.out, limit=args.limit, lookup=args.lookup, critic=args.critic)
+    out = args.out
+    cmd = args.cmd
+    if cmd in (None, "observe"):
+        observe(
+            out,
+            limit=getattr(args, "limit", None),
+            lookup=getattr(args, "lookup", None),
+            critic=bool(getattr(args, "critic", False)),
+        )
+        return
+    if cmd == "show":
+        cmd_show(out)
+        return
+    if cmd == "explain":
+        cmd_explain(out, args.designation)
+        return
+    if cmd == "gaps":
+        cmd_gaps(out)
+        return
+    if cmd == "diff":
+        cmd_diff(out)
+        return
+    raise SystemExit(f"unknown verb: {cmd}")
 
 
 if __name__ == "__main__":
