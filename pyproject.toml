@@ -1,7 +1,7 @@
 [project]
 name = "dyson-one"
-version = "0.1.0"
-description = "HudsonR&D open ledger of near-Earth bodies scored for in-space resource potential."
+version = "0.2.0"
+description = "HudsonR&D world-model of near-Earth bodies scored for in-space resource potential."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }

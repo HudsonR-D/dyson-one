@@ -17,11 +17,11 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -e .
-      - run: python -m dyson_one --out data --limit 60 --lookup 12
+      - run: python -m dyson_one observe --out data
       - name: Commit snapshot
         run: |
           git config user.name "dyson-one-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/latest.json data/BRIEF.md data/ledger.jsonl
-          git diff --cached --quiet || git commit -m "chore: refresh Dyson One ledger"
+          git add data/latest.json data/previous.json data/BRIEF.md data/ledger.jsonl
+          git diff --cached --quiet || git commit -m "chore: refresh Dyson One world"
           git push
