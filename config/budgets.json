@@ -1,0 +1,10 @@
+{
+  "http_timeout_s": 45,
+  "nhats_limit": 60,
+  "cad_limit": 60,
+  "sbdb_lookups": 12,
+  "sbdb_pause_s": 0.25,
+  "critic_tokens_max": 0,
+  "top_n_brief": 25,
+  "attention_n": 8
+}

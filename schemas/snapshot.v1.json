@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/HudsonR-D/dyson-one/schemas/snapshot.v1.json",
+  "title": "Dyson One snapshot v1",
+  "type": "object",
+  "required": ["schema_version", "project", "charter", "generated_at", "hash", "count", "attention", "objects"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "project": { "const": "dyson-one" },
+    "charter": { "const": "observe-and-rank" },
+    "generated_at": { "type": "string" },
+    "hash": { "type": "string" },
+    "count": { "type": "integer", "minimum": 0 },
+    "budgets": { "type": "object" },
+    "attention": {
+      "type": "object",
+      "required": ["unknown_low_dv", "missing_approach", "high_water"]
+    },
+    "objects": { "type": "array" }
+  }
+}
