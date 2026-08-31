@@ -1,0 +1,25 @@
+[project]
+name = "dyson-one"
+version = "0.1.0"
+description = "HudsonR&D open ledger of near-Earth bodies scored for in-space resource potential."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "HudsonR&D" }]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+dyson-one = "dyson_one.__main__:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
