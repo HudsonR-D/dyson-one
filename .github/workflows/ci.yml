@@ -15,3 +15,5 @@ jobs:
           python-version: "3.12"
       - run: pip install -e ".[dev]"
       - run: pytest -q
+      - name: CLI contract
+        run: python -m dyson_one observe --help

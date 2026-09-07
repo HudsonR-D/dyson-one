@@ -1,6 +1,6 @@
 [project]
 name = "dyson-one"
-version = "0.2.0"
+version = "0.2.1"
 description = "HudsonR&D world-model of near-Earth bodies scored for in-space resource potential."
 readme = "README.md"
 requires-python = ">=3.11"
