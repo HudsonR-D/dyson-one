@@ -10,13 +10,34 @@ import urllib.request
 from typing import Any
 
 SSD = "https://ssd-api.jpl.nasa.gov"
-UA = "DysonOne/0.1 (+https://github.com/HudsonR-D/dyson-one; research ledger)"
+UA = "DysonOne/0.2.1 (+https://github.com/HudsonR-D/dyson-one; research ledger)"
 
 
-def _get(url: str, timeout: float = 45.0) -> dict[str, Any]:
-    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/json"})
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+class SensorError(RuntimeError):
+    """A public catalog call failed after retries."""
+
+
+def _get(url: str, timeout: float = 45.0, retries: int = 3) -> dict[str, Any]:
+    last: Exception | None = None
+    for attempt in range(retries):
+        req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/json"})
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                raw = resp.read().decode("utf-8")
+            return json.loads(raw)
+        except urllib.error.HTTPError as exc:
+            last = exc
+            if exc.code in {429, 500, 502, 503, 504} and attempt + 1 < retries:
+                time.sleep(1.5 * (attempt + 1))
+                continue
+            raise SensorError(f"HTTP {exc.code} for {url}") from exc
+        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
+            last = exc
+            if attempt + 1 < retries:
+                time.sleep(1.5 * (attempt + 1))
+                continue
+            raise SensorError(f"sensor failed for {url}: {exc}") from exc
+    raise SensorError(f"sensor failed for {url}: {last}")
 
 
 def fetch_nhats(
@@ -101,7 +122,6 @@ def fetch_sbdb(des: str) -> dict[str, Any]:
 
 
 def enrich_specs(rows: list[dict[str, Any]], *, max_lookup: int = 15, pause_s: float = 0.25) -> None:
-    """Best-effort spectral/diameter fill. Failures stay unknown."""
     seen: set[str] = set()
     lookups = 0
     for row in rows:
@@ -113,7 +133,8 @@ def enrich_specs(rows: list[dict[str, Any]], *, max_lookup: int = 15, pause_s: f
             extra = fetch_sbdb(des)
             lookups += 1
             time.sleep(pause_s)
-        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, KeyError):
+        except (SensorError, KeyError, TypeError):
+            lookups += 1
             continue
         if extra.get("spec"):
             row["spec"] = extra["spec"]

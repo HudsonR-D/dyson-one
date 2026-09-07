@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 import argparse
+import sys
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from dyson_one.critic import run_critic
-from dyson_one.ingest import enrich_specs, fetch_close_approaches, fetch_nhats
+from dyson_one.ingest import SensorError, enrich_specs, fetch_close_approaches, fetch_nhats
 from dyson_one.ledger import write_snapshot
 from dyson_one.score import score_body
 from dyson_one.world import (
@@ -30,18 +31,35 @@ def merge_rows(nhats: list[dict], approaches: list[dict]) -> list[dict]:
     return list(by_des.values())
 
 
-def observe(out_dir: Path, *, limit: int | None, lookup: int | None, critic: bool) -> None:
+def observe(out_dir: Path, *, limit: int | None, lookup: int | None, critic: bool) -> int:
     budgets = load_budgets()
     nhats_limit = limit if limit is not None else int(budgets.get("nhats_limit") or 60)
     cad_limit = int(budgets.get("cad_limit") or nhats_limit)
     lookups = lookup if lookup is not None else int(budgets.get("sbdb_lookups") or 12)
     today = datetime.now(timezone.utc).date()
-    nhats = fetch_nhats(limit=nhats_limit)
-    approaches = fetch_close_approaches(
-        date_min=today.isoformat(),
-        date_max=(today + timedelta(days=1100)).isoformat(),
-        limit=cad_limit,
-    )
+
+    errors: list[str] = []
+    nhats: list[dict] = []
+    approaches: list[dict] = []
+    try:
+        nhats = fetch_nhats(limit=nhats_limit)
+    except SensorError as exc:
+        errors.append(f"nhats: {exc}")
+    try:
+        approaches = fetch_close_approaches(
+            date_min=today.isoformat(),
+            date_max=(today + timedelta(days=1100)).isoformat(),
+            limit=cad_limit,
+        )
+    except SensorError as exc:
+        errors.append(f"cad: {exc}")
+
+    if not nhats and not approaches:
+        print("observe failed: both sensors empty", file=sys.stderr)
+        for line in errors:
+            print(line, file=sys.stderr)
+        return 1
+
     rows = merge_rows(nhats, approaches)
     enrich_specs(rows, max_lookup=lookups)
 
@@ -62,26 +80,36 @@ def observe(out_dir: Path, *, limit: int | None, lookup: int | None, critic: boo
                 approach_au=row.get("approach_au"),
             )
         )
-    write_snapshot(out_dir, scores, budgets=budgets)
+    payload = write_snapshot(out_dir, scores, budgets=budgets)
     if critic:
         run_critic(out_dir)
+    print(
+        f"observed count={payload['count']} hash={payload['hash']} "
+        f"nhats={len(nhats)} cad={len(approaches)}"
+    )
+    for line in errors:
+        print(f"degraded: {line}", file=sys.stderr)
+    return 0
 
 
-def cmd_show(out_dir: Path) -> None:
+def cmd_show(out_dir: Path) -> int:
     snap = load_snapshot(out_dir)
     brief = out_dir / "BRIEF.md"
     print(brief.read_text(encoding="utf-8") if brief.exists() else snap.get("hash"))
+    return 0
 
 
-def cmd_explain(out_dir: Path, designation: str) -> None:
+def cmd_explain(out_dir: Path, designation: str) -> int:
     snap = load_snapshot(out_dir)
     row = find_object(snap, designation)
     if row is None:
-        raise SystemExit(f"not in snapshot: {designation}")
+        print(f"not in snapshot: {designation}", file=sys.stderr)
+        return 1
     print(explain_row(row), end="")
+    return 0
 
 
-def cmd_gaps(out_dir: Path) -> None:
+def cmd_gaps(out_dir: Path) -> int:
     snap = load_snapshot(out_dir)
     att = snap.get("attention") or {}
     print(f"snapshot {snap.get('hash')}  n={snap.get('count')}")
@@ -89,56 +117,65 @@ def cmd_gaps(out_dir: Path) -> None:
         print(f"{key}:")
         for des in att.get(key) or []:
             print(f"  {des}")
+    return 0
 
 
-def cmd_diff(out_dir: Path) -> None:
+def cmd_diff(out_dir: Path) -> int:
     print(diff_worlds(load_snapshot(out_dir), load_previous(out_dir)), end="")
+    return 0
 
 
-def main() -> None:
+def _add_common(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--out", type=Path, default=Path("data"))
+    parser.add_argument("--limit", type=int, default=None)
+    parser.add_argument("--lookup", type=int, default=None)
+    parser.add_argument("--critic", action="store_true")
+
+
+def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="dyson-one")
-    p.add_argument("--out", type=Path, default=Path("data"))
+    _add_common(p)
     sub = p.add_subparsers(dest="cmd")
-
     obs = sub.add_parser("observe", help="refresh the world from JPL")
-    obs.add_argument("--limit", type=int, default=None)
-    obs.add_argument("--lookup", type=int, default=None)
-    obs.add_argument("--critic", action="store_true")
-
-    sub.add_parser("show", help="print BRIEF.md")
+    _add_common(obs)
+    show = sub.add_parser("show", help="print BRIEF.md")
+    _add_common(show)
     ex = sub.add_parser("explain", help="expand optics for one designation")
+    _add_common(ex)
     ex.add_argument("designation")
-    sub.add_parser("gaps", help="print attention queues")
-    sub.add_parser("diff", help="latest vs previous snapshot")
+    gaps = sub.add_parser("gaps", help="print attention queues")
+    _add_common(gaps)
+    diff = sub.add_parser("diff", help="latest vs previous snapshot")
+    _add_common(diff)
+    return p
 
-    p.add_argument("--limit", type=int, default=None)
-    p.add_argument("--lookup", type=int, default=None)
-    p.add_argument("--critic", action="store_true")
 
-    args = p.parse_args()
+def dispatch(args: argparse.Namespace) -> int:
     out = args.out
     cmd = args.cmd
     if cmd in (None, "observe"):
-        observe(
+        return observe(
             out,
             limit=getattr(args, "limit", None),
             lookup=getattr(args, "lookup", None),
             critic=bool(getattr(args, "critic", False)),
         )
-        return
     if cmd == "show":
-        cmd_show(out)
-        return
+        return cmd_show(out)
     if cmd == "explain":
-        cmd_explain(out, args.designation)
-        return
+        return cmd_explain(out, args.designation)
     if cmd == "gaps":
-        cmd_gaps(out)
-        return
+        return cmd_gaps(out)
     if cmd == "diff":
-        cmd_diff(out)
-        return
-    raise SystemExit(f"unknown verb: {cmd}")
+        return cmd_diff(out)
+    print(f"unknown verb: {cmd}", file=sys.stderr)
+    return 2
+
+
+def main(argv: list[str] | None = None) -> None:
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    raise SystemExit(dispatch(args))
 
 
 if __name__ == "__main__":
