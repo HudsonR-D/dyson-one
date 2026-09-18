@@ -1,6 +1,6 @@
-# Dyson One brief — 2026-09-17T16:30:32Z
+# Dyson One brief — 2026-09-18T16:02:03Z
 
-schema v1 · objects **120** · `22931a454558b7f0`
+schema v1 · objects **120** · `fb03ce243338dbbb`
 
 Scores are research ranks, not mine plans. `earth_spot_usd_vanity` is a toy number.
 
@@ -8,7 +8,7 @@ Scores are research ranks, not mine plans. `earth_spot_usd_vanity` is a toy numb
 
 - unknown_low_dv: 2000 SG344, 2006 BZ147, 2009 HC, 2007 CS5, 2010 JK1, 2009 UY19, 2009 BW2, 2007 YF
 - missing_approach: 2000 AE205, 2000 AG6, 2000 SG344, 2000 UK11, 2001 AV43, 2001 CQ36, 2001 VE2, 2002 LW
-- high_water: 99942, 2001 KF54, 2016 NV, 2026 NT2, 524522, 341843, 2009 UY19, 2024 RR14
+- high_water: 99942, 2001 KF54, 2016 NV, 524522, 341843, 2009 UY19, 2024 RR14, 2015 DG200
 
 ## Rank
 
@@ -17,11 +17,11 @@ Scores are research ranks, not mine plans. `earth_spot_usd_vanity` is a toy numb
 | 1 | 99942 | unknown | 6.049 | — | 0.005178 | 0.004142 | 0.45 |
 | 2 | 2001 KF54 | unknown | 12.0 | 2026-Nov-06 03:38 | 0.004895 | 0.003916 | 0.35 |
 | 3 | 2016 NV | unknown | 12.0 | 2026-Dec-08 18:43 | 0.004664 | 0.003731 | 0.35 |
-| 4 | 2026 NT2 | unknown | 12.0 | 2026-Sep-17 05:07 | 0.003511 | 0.002809 | 0.35 |
-| 5 | 524522 | unknown | 12.0 | 2026-Nov-02 19:10 | 0.002916 | 0.002332 | 0.35 |
-| 6 | 341843 | unknown | 6.291 | — | 0.00258 | 0.002064 | 0.45 |
-| 7 | 2009 UY19 | unknown | 5.079 | — | 0.001525 | 0.00122 | 0.45 |
-| 8 | 2024 RR14 | unknown | 12.0 | 2027-Jan-13 19:24 | 0.001049 | 0.000839 | 0.35 |
+| 4 | 524522 | unknown | 12.0 | 2026-Nov-02 19:10 | 0.002916 | 0.002332 | 0.35 |
+| 5 | 341843 | unknown | 6.291 | — | 0.00258 | 0.002064 | 0.45 |
+| 6 | 2009 UY19 | unknown | 5.079 | — | 0.001525 | 0.00122 | 0.45 |
+| 7 | 2024 RR14 | unknown | 12.0 | 2027-Jan-13 19:24 | 0.001049 | 0.000839 | 0.35 |
+| 8 | 2015 DG200 | unknown | 12.0 | 2027-Jan-22 12:01 | 0.00087 | 0.000696 | 0.35 |
 | 9 | 2017 WJ2 | unknown | 12.0 | 2026-Nov-05 04:22 | 0.000807 | 0.000645 | 0.35 |
 | 10 | 363305 | unknown | 7.97 | — | 0.000797 | 0.000638 | 0.45 |
 | 11 | 2020 XC3 | unknown | 12.0 | 2026-Dec-08 00:44 | 0.000727 | 0.000582 | 0.35 |
