@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dyson One — world</title>
+  <style>
+    :root { --bg:#0c0d0b; --bg-2:#141510; --bg-3:#1c1e16; --line:#2a2d22; --ink:#e8e4d4; --muted:#9a947e; --copper:#c9843a; --copper-dim:#8a5a24; --water:#6ea8a0; --metal:#c4b48a; --stony:#b07a5a; --unknown:#6e6a5c; --danger:#c45c3a; --mono:ui-monospace,SFMono-Regular,Menlo,monospace; --sans:Segoe UI,system-ui,sans-serif; }
+    * { box-sizing:border-box; } html,body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); }
+    .app { max-width:1240px; margin:0 auto; padding:28px 22px 80px; }
+    header { display:grid; grid-template-columns:1fr auto; gap:16px; align-items:end; border-bottom:1px solid var(--line); padding-bottom:20px; }
+    .mark { font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--copper); }
+    h1 { font-size:28px; font-weight:500; margin:6px 0 4px; letter-spacing:-.03em; }
+    .sub { color:var(--muted); font-size:14px; max-width:46ch; line-height:1.45; }
+    .meta { text-align:right; font-family:var(--mono); font-size:12px; color:var(--muted); line-height:1.7; }
+    .meta b { color:var(--ink); font-weight:500; }
+    .verbs { display:flex; gap:8px; margin-top:18px; flex-wrap:wrap; }
+    .verb { border:1px solid var(--line); background:var(--bg-2); color:var(--ink); padding:7px 12px; border-radius:999px; font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; }
+    .verb[aria-pressed="true"] { border-color:var(--copper); color:var(--copper); background:#1a140c; }
+    .grid { display:grid; grid-template-columns:280px 1fr 300px; gap:18px; margin-top:22px; }
+    @media (max-width:980px){ .grid { grid-template-columns:1fr; } }
+    .panel { background:var(--bg-2); border:1px solid var(--line); border-radius:12px; padding:16px; min-height:120px; }
+    .panel h2 { margin:0 0 12px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); font-weight:500; font-family:var(--mono); }
+    .chip-list { display:flex; flex-direction:column; gap:6px; }
+    .chip { display:flex; justify-content:space-between; gap:8px; border:1px solid var(--line); border-radius:8px; padding:8px 10px; cursor:pointer; background:var(--bg-3); font-family:var(--mono); font-size:12px; }
+    .chip:hover { border-color:var(--copper-dim); }
+    .search { width:100%; background:var(--bg); border:1px solid var(--line); color:var(--ink); border-radius:8px; padding:9px 11px; font-family:var(--mono); font-size:13px; margin-bottom:10px; }
+    table { width:100%; border-collapse:collapse; font-size:13px; }
+    th { text-align:left; color:var(--muted); font-weight:500; font-size:11px; letter-spacing:.08em; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid var(--line); }
+    td { padding:8px; border-bottom:1px solid #1f2118; font-family:var(--mono); font-size:12px; }
+    tr { cursor:pointer; } tr:hover td { background:#181a13; } tr.sel td { background:#1c180f; }
+    .fam { display:inline-block; padding:2px 7px; border-radius:999px; font-size:10px; letter-spacing:.06em; text-transform:uppercase; }
+    .fam.water { background:#16322f; color:var(--water); } .fam.metal { background:#2a2618; color:var(--metal); }
+    .fam.stony { background:#2a1c16; color:var(--stony); } .fam.unknown { background:#222018; color:var(--unknown); }
+    .explain { font-size:13px; line-height:1.55; color:var(--muted); } .explain b { color:var(--ink); font-weight:500; }
+    .explain pre { white-space:pre-wrap; font-family:var(--mono); font-size:12px; color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:8px; padding:12px; }
+    .foot { margin-top:28px; color:var(--muted); font-size:12px; } .err { color:var(--danger); font-family:var(--mono); font-size:13px; } .num { text-align:right; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div>
+        <div class="mark">HudsonR&D · observe-and-rank</div>
+        <h1>Dyson One</h1>
+        <p class="sub">World-model of near-Earth bodies. Two currencies: water in space, speculative metal. Vanity dollars are a toy.</p>
+        <div class="verbs">
+          <button class="verb" data-view="show" aria-pressed="true">show</button>
+          <button class="verb" data-view="gaps">gaps</button>
+          <button class="verb" data-view="explain">explain</button>
+        </div>
+      </div>
+      <div class="meta" id="meta">loading world…</div>
+    </header>
+    <div class="grid">
+      <aside class="panel"><h2>Attention</h2><div id="attention">—</div></aside>
+      <section class="panel"><h2 id="main-title">Rank</h2><input class="search" id="q" placeholder="filter designation / name / family" /><div id="main"></div></section>
+      <aside class="panel"><h2>Explain</h2><div class="explain" id="explain">Select a body.</div></aside>
+    </div>
+    <p class="foot">Constitution: observe and rank. No actuators. Scores are research ranks, not mine plans.</p>
+  </div>
+  <script>
+    const SOURCES = ["./latest.json","../data/latest.json","https://raw.githubusercontent.com/HudsonR-D/dyson-one/main/data/latest.json"];
+    const state = { world:null, view:"show", selected:null, q:"" };
+    const $ = (id) => document.getElementById(id);
+    async function loadWorld() {
+      let lastErr = "no source";
+      for (const url of SOURCES) {
+        try {
+          const res = await fetch(url, { cache:"no-store" });
+          if (!res.ok) throw new Error(res.status + " " + url);
+          return await res.json();
+        } catch (err) { lastErr = String(err); }
+      }
+      throw new Error(lastErr);
+    }
+    function famChip(fam) { return '<span class="fam '+(fam||"unknown")+'">'+(fam||"unknown")+'</span>'; }
+    function fmt(n,d) { if (n==null||Number.isNaN(n)) return "—"; return Number(n).toFixed(d||6); }
+    function objects() {
+      const q = state.q.trim().toLowerCase();
+      let rows = state.world.objects || [];
+      if (q) rows = rows.filter((o) => [o.designation,o.name,o.spec_family,o.spec].filter(Boolean).join(" ").toLowerCase().includes(q));
+      return rows;
+    }
+    function renderMeta() {
+      const w = state.world;
+      $("meta").innerHTML = '<div>snapshot <b>'+w.hash+'</b></div><div>'+w.generated_at+'</div><div>n=<b>'+w.count+'</b> · schema v'+w.schema_version+'</div>';
+    }
+    function renderAttention() {
+      const att = state.world.attention || {};
+      const block = (label, ids) => {
+        const chips = (ids||[]).map((id) => '<button class="chip" data-des="'+id+'"><span>'+id+'</span><span>'+label+'</span></button>').join("");
+        return '<div style="margin-bottom:14px"><div class="mark" style="margin-bottom:8px">'+label+'</div><div class="chip-list">'+(chips||"—")+'</div></div>';
+      };
+      $("attention").innerHTML = block("unknown_low_dv", att.unknown_low_dv)+block("missing_approach", att.missing_approach)+block("high_water", att.high_water);
+    }
+    function renderTable() {
+      const rows = objects();
+      const body = rows.slice(0,80).map((o,i) => {
+        const sel = state.selected && state.selected.designation===o.designation ? "sel" : "";
+        return '<tr class="'+sel+'" data-des="'+o.designation+'"><td class="num">'+(i+1)+'</td><td>'+o.designation+'</td><td>'+famChip(o.spec_family)+'</td><td class="num">'+(o.dv_kms??"—")+'</td><td>'+(o.next_approach||"—")+'</td><td class="num">'+fmt(o.water_score)+'</td><td class="num">'+fmt(o.pgm_score)+'</td><td class="num">'+(o.confidence??"—")+'</td></tr>';
+      }).join("");
+      $("main").innerHTML = '<div style="overflow:auto;max-height:70vh"><table><thead><tr><th>#</th><th>Des</th><th>Family</th><th>dv</th><th>Approach</th><th>Water</th><th>PGM</th><th>Conf</th></tr></thead><tbody>'+(body||'<tr><td colspan="8">no rows</td></tr>')+'</tbody></table></div>';
+    }
+    function renderGaps() {
+      const att = state.world.attention || {};
+      $("main").innerHTML = Object.entries(att).map(([k,ids]) => '<div style="margin-bottom:16px"><div class="mark">'+k+'</div><div class="chip-list" style="margin-top:8px">'+(ids||[]).map((id)=>'<button class="chip" data-des="'+id+'">'+id+'</button>').join("")+'</div></div>').join("");
+    }
+    function explainText(o) {
+      if (!o) return "Select a body.";
+      const notes = (o.notes||[]).map((n)=>"- "+n).join("\n") || "- (none)";
+      return '<div><b>'+o.designation+'</b> '+(o.name?("· "+o.name):"")+'</div><pre># explain '+o.designation+'\n\nfamily: '+o.spec_family+' (spec='+(o.spec||"none")+')\ndiameter_km: '+o.diameter_km+'\ndv_kms: '+o.dv_kms+'\nwater_score: '+o.water_score+'\npgm_score: '+o.pgm_score+'\nconfidence: '+o.confidence+'\nnext_approach: '+(o.next_approach||"—")+'\n\noptics: water_w[family] * diameter_km^1.5 / (dv_kms + 0.5)\nunknown family => confidence <= 0.45\nearth_spot_usd_vanity is a toy. Not NPV.\n\nnotes:\n'+notes+'</pre>';
+    }
+    function findDes(des) { return (state.world.objects||[]).find((o)=>o.designation===des)||null; }
+    function render() {
+      renderMeta(); renderAttention();
+      $("main-title").textContent = state.view==="gaps" ? "Gaps" : "Rank";
+      if (state.view==="gaps") renderGaps(); else renderTable();
+      $("explain").innerHTML = explainText(state.selected);
+    }
+    function select(des) {
+      state.selected = findDes(des);
+      if (state.selected) state.view = "explain";
+      document.querySelectorAll(".verb").forEach((b)=>b.setAttribute("aria-pressed", b.dataset.view===state.view?"true":"false"));
+      render();
+    }
+    document.querySelectorAll(".verb").forEach((btn)=>btn.addEventListener("click",()=>{
+      state.view = btn.dataset.view;
+      document.querySelectorAll(".verb").forEach((b)=>b.setAttribute("aria-pressed", b===btn?"true":"false"));
+      render();
+    }));
+    $("q").addEventListener("input",(e)=>{ state.q=e.target.value; state.view="show"; render(); });
+    document.body.addEventListener("click",(e)=>{ const node=e.target.closest("[data-des]"); if(!node) return; select(node.getAttribute("data-des")); });
+    loadWorld().then((world)=>{
+      state.world = world;
+      const first = (world.attention && world.attention.unknown_low_dv || [])[0];
+      state.selected = findDes(first) || (world.objects||[])[0] || null;
+      render();
+    }).catch((err)=>{
+      $("meta").innerHTML = '<span class="err">world missing</span>';
+      $("main").innerHTML = '<p class="err">'+err.message+'. Run observe, or open next to data/latest.json.</p>';
+    });
+  </script>
+</body>
+</html>
