@@ -2,9 +2,9 @@
   "schema_version": 1,
   "project": "dyson-one",
   "charter": "observe-and-rank",
-  "generated_at": "2026-10-10T17:06:05Z",
+  "generated_at": "2026-10-11T17:29:34Z",
   "count": 120,
-  "hash": "74bda843c44ac2ff",
+  "hash": "6d5796deed094746",
   "budgets": {
     "http_timeout_s": 45,
     "nhats_limit": 60,
@@ -44,7 +44,7 @@
       "341843",
       "2009 UY19",
       "2024 RR14",
-      "2015 DG200"
+      "2017 WJ2"
     ]
   },
   "objects": [
@@ -190,27 +190,6 @@
       ]
     },
     {
-      "designation": "2015 DG200",
-      "name": null,
-      "spec": null,
-      "spec_family": "unknown",
-      "h_mag": 22.29,
-      "diameter_km": 0.1237,
-      "dv_kms": 12.0,
-      "next_approach": "2027-Jan-22 12:01",
-      "approach_au": 0.00952786213700134,
-      "water_score": 0.00087,
-      "pgm_score": 0.000696,
-      "confidence": 0.35,
-      "earth_spot_usd_vanity": 297510.82,
-      "notes": [
-        "diameter estimated from H with albedo 0.14",
-        "delta-v missing; penalty dv=12 km/s applied",
-        "spectral class unknown; scores capped in meaning",
-        "earth_spot_usd_vanity is a toy mass*price, not NPV"
-      ]
-    },
-    {
       "designation": "2017 WJ2",
       "name": null,
       "spec": null,
@@ -345,6 +324,27 @@
       "confidence": 0.45,
       "earth_spot_usd_vanity": 30648.12,
       "notes": [
+        "spectral class unknown; scores capped in meaning",
+        "earth_spot_usd_vanity is a toy mass*price, not NPV"
+      ]
+    },
+    {
+      "designation": "2026 TK35",
+      "name": null,
+      "spec": null,
+      "spec_family": "unknown",
+      "h_mag": 23.385,
+      "diameter_km": 0.0747,
+      "dv_kms": 12.0,
+      "next_approach": "2026-Oct-13 08:49",
+      "approach_au": 0.0491979493355852,
+      "water_score": 0.000409,
+      "pgm_score": 0.000327,
+      "confidence": 0.35,
+      "earth_spot_usd_vanity": 65539.45,
+      "notes": [
+        "diameter estimated from H with albedo 0.14",
+        "delta-v missing; penalty dv=12 km/s applied",
         "spectral class unknown; scores capped in meaning",
         "earth_spot_usd_vanity is a toy mass*price, not NPV"
       ]
@@ -674,15 +674,15 @@
       "name": null,
       "spec": null,
       "spec_family": "unknown",
-      "h_mag": 24.505,
-      "diameter_km": 0.0446,
+      "h_mag": 24.525,
+      "diameter_km": 0.0442,
       "dv_kms": 12.0,
       "next_approach": "2026-Oct-12 20:16",
-      "approach_au": 0.0281816175088183,
-      "water_score": 0.000188,
-      "pgm_score": 0.000151,
+      "approach_au": 0.0281669241623366,
+      "water_score": 0.000186,
+      "pgm_score": 0.000149,
       "confidence": 0.35,
-      "earth_spot_usd_vanity": 13947.71,
+      "earth_spot_usd_vanity": 13567.59,
       "notes": [
         "diameter estimated from H with albedo 0.14",
         "delta-v missing; penalty dv=12 km/s applied",
@@ -1275,15 +1275,15 @@
       "name": null,
       "spec": null,
       "spec_family": "unknown",
-      "h_mag": 25.485,
-      "diameter_km": 0.0284,
+      "h_mag": 25.473,
+      "diameter_km": 0.0286,
       "dv_kms": 12.0,
-      "next_approach": "2026-Oct-13 18:06",
-      "approach_au": 0.0323356953164982,
-      "water_score": 9.6e-05,
+      "next_approach": "2026-Oct-13 18:07",
+      "approach_au": 0.0323521917345894,
+      "water_score": 9.7e-05,
       "pgm_score": 7.7e-05,
       "confidence": 0.35,
-      "earth_spot_usd_vanity": 3601.66,
+      "earth_spot_usd_vanity": 3661.87,
       "notes": [
         "diameter estimated from H with albedo 0.14",
         "delta-v missing; penalty dv=12 km/s applied",
@@ -1627,27 +1627,6 @@
       ]
     },
     {
-      "designation": "2026 TE2",
-      "name": null,
-      "spec": null,
-      "spec_family": "unknown",
-      "h_mag": 26.017,
-      "diameter_km": 0.0222,
-      "dv_kms": 12.0,
-      "next_approach": "2026-Oct-16 03:48",
-      "approach_au": 0.0153006567511086,
-      "water_score": 6.6e-05,
-      "pgm_score": 5.3e-05,
-      "confidence": 0.35,
-      "earth_spot_usd_vanity": 1727.04,
-      "notes": [
-        "diameter estimated from H with albedo 0.14",
-        "delta-v missing; penalty dv=12 km/s applied",
-        "spectral class unknown; scores capped in meaning",
-        "earth_spot_usd_vanity is a toy mass*price, not NPV"
-      ]
-    },
-    {
       "designation": "2009 WC106",
       "name": "(2009 WC106)",
       "spec": null,
@@ -1662,6 +1641,27 @@
       "confidence": 0.45,
       "earth_spot_usd_vanity": 431.03,
       "notes": [
+        "spectral class unknown; scores capped in meaning",
+        "earth_spot_usd_vanity is a toy mass*price, not NPV"
+      ]
+    },
+    {
+      "designation": "2026 TE2",
+      "name": null,
+      "spec": null,
+      "spec_family": "unknown",
+      "h_mag": 26.072,
+      "diameter_km": 0.0217,
+      "dv_kms": 12.0,
+      "next_approach": "2026-Oct-16 03:47",
+      "approach_au": 0.0153024623089842,
+      "water_score": 6.4e-05,
+      "pgm_score": 5.1e-05,
+      "confidence": 0.35,
+      "earth_spot_usd_vanity": 1600.67,
+      "notes": [
+        "diameter estimated from H with albedo 0.14",
+        "delta-v missing; penalty dv=12 km/s applied",
         "spectral class unknown; scores capped in meaning",
         "earth_spot_usd_vanity is a toy mass*price, not NPV"
       ]
@@ -1694,32 +1694,11 @@
       "diameter_km": 0.0215,
       "dv_kms": 12.0,
       "next_approach": "2026-Oct-12 03:55",
-      "approach_au": 0.0251395816904116,
+      "approach_au": 0.0251354684055236,
       "water_score": 6.3e-05,
       "pgm_score": 5e-05,
       "confidence": 0.35,
       "earth_spot_usd_vanity": 1552.75,
-      "notes": [
-        "diameter estimated from H with albedo 0.14",
-        "delta-v missing; penalty dv=12 km/s applied",
-        "spectral class unknown; scores capped in meaning",
-        "earth_spot_usd_vanity is a toy mass*price, not NPV"
-      ]
-    },
-    {
-      "designation": "2026 TV3",
-      "name": null,
-      "spec": null,
-      "spec_family": "unknown",
-      "h_mag": 26.127,
-      "diameter_km": 0.0211,
-      "dv_kms": 12.0,
-      "next_approach": "2026-Oct-12 20:07",
-      "approach_au": 0.0234897599176796,
-      "water_score": 6.1e-05,
-      "pgm_score": 4.9e-05,
-      "confidence": 0.35,
-      "earth_spot_usd_vanity": 1483.55,
       "notes": [
         "diameter estimated from H with albedo 0.14",
         "delta-v missing; penalty dv=12 km/s applied",
@@ -1762,6 +1741,27 @@
       "pgm_score": 4.8e-05,
       "confidence": 0.35,
       "earth_spot_usd_vanity": 1417.43,
+      "notes": [
+        "diameter estimated from H with albedo 0.14",
+        "delta-v missing; penalty dv=12 km/s applied",
+        "spectral class unknown; scores capped in meaning",
+        "earth_spot_usd_vanity is a toy mass*price, not NPV"
+      ]
+    },
+    {
+      "designation": "2026 TV3",
+      "name": null,
+      "spec": null,
+      "spec_family": "unknown",
+      "h_mag": 26.152,
+      "diameter_km": 0.0209,
+      "dv_kms": 12.0,
+      "next_approach": "2026-Oct-12 20:07",
+      "approach_au": 0.0234879607190766,
+      "water_score": 6e-05,
+      "pgm_score": 4.8e-05,
+      "confidence": 0.35,
+      "earth_spot_usd_vanity": 1433.19,
       "notes": [
         "diameter estimated from H with albedo 0.14",
         "delta-v missing; penalty dv=12 km/s applied",
@@ -2029,6 +2029,27 @@
       ]
     },
     {
+      "designation": "2026 TG9",
+      "name": null,
+      "spec": null,
+      "spec_family": "unknown",
+      "h_mag": 27.025,
+      "diameter_km": 0.014,
+      "dv_kms": 12.0,
+      "next_approach": "2026-Oct-14 04:57",
+      "approach_au": 0.00151910155122952,
+      "water_score": 3.3e-05,
+      "pgm_score": 2.6e-05,
+      "confidence": 0.35,
+      "earth_spot_usd_vanity": 429.04,
+      "notes": [
+        "diameter estimated from H with albedo 0.14",
+        "delta-v missing; penalty dv=12 km/s applied",
+        "spectral class unknown; scores capped in meaning",
+        "earth_spot_usd_vanity is a toy mass*price, not NPV"
+      ]
+    },
+    {
       "designation": "2018 FQ4",
       "name": null,
       "spec": null,
@@ -2113,48 +2134,6 @@
       ]
     },
     {
-      "designation": "2026 TN4",
-      "name": null,
-      "spec": null,
-      "spec_family": "unknown",
-      "h_mag": 27.332,
-      "diameter_km": 0.0121,
-      "dv_kms": 12.0,
-      "next_approach": "2026-Oct-10 00:40",
-      "approach_au": 0.0209540213507513,
-      "water_score": 2.7e-05,
-      "pgm_score": 2.1e-05,
-      "confidence": 0.35,
-      "earth_spot_usd_vanity": 280.74,
-      "notes": [
-        "diameter estimated from H with albedo 0.14",
-        "delta-v missing; penalty dv=12 km/s applied",
-        "spectral class unknown; scores capped in meaning",
-        "earth_spot_usd_vanity is a toy mass*price, not NPV"
-      ]
-    },
-    {
-      "designation": "2019 SD8",
-      "name": null,
-      "spec": null,
-      "spec_family": "unknown",
-      "h_mag": 27.4,
-      "diameter_km": 0.0118,
-      "dv_kms": 12.0,
-      "next_approach": "2026-Oct-10 04:18",
-      "approach_au": 0.0478794963287199,
-      "water_score": 2.6e-05,
-      "pgm_score": 2e-05,
-      "confidence": 0.35,
-      "earth_spot_usd_vanity": 255.57,
-      "notes": [
-        "diameter estimated from H with albedo 0.14",
-        "delta-v missing; penalty dv=12 km/s applied",
-        "spectral class unknown; scores capped in meaning",
-        "earth_spot_usd_vanity is a toy mass*price, not NPV"
-      ]
-    },
-    {
       "designation": "2026 TF4",
       "name": null,
       "spec": null,
@@ -2197,19 +2176,19 @@
       ]
     },
     {
-      "designation": "2026 TB6",
+      "designation": "2026 TL35",
       "name": null,
       "spec": null,
       "spec_family": "unknown",
-      "h_mag": 27.643,
-      "diameter_km": 0.0105,
+      "h_mag": 27.532,
+      "diameter_km": 0.0111,
       "dv_kms": 12.0,
-      "next_approach": "2026-Oct-10 18:29",
-      "approach_au": 0.013704897123568,
-      "water_score": 2.2e-05,
-      "pgm_score": 1.7e-05,
+      "next_approach": "2026-Oct-11 06:40",
+      "approach_au": 0.013078295604865,
+      "water_score": 2.3e-05,
+      "pgm_score": 1.9e-05,
       "confidence": 0.35,
-      "earth_spot_usd_vanity": 182.68,
+      "earth_spot_usd_vanity": 212.96,
       "notes": [
         "diameter estimated from H with albedo 0.14",
         "delta-v missing; penalty dv=12 km/s applied",
@@ -2302,6 +2281,27 @@
       ]
     },
     {
+      "designation": "2026 TM35",
+      "name": null,
+      "spec": null,
+      "spec_family": "unknown",
+      "h_mag": 27.727,
+      "diameter_km": 0.0101,
+      "dv_kms": 12.0,
+      "next_approach": "2026-Oct-13 18:31",
+      "approach_au": 0.00999303714373308,
+      "water_score": 2e-05,
+      "pgm_score": 1.6e-05,
+      "confidence": 0.35,
+      "earth_spot_usd_vanity": 162.67,
+      "notes": [
+        "diameter estimated from H with albedo 0.14",
+        "delta-v missing; penalty dv=12 km/s applied",
+        "spectral class unknown; scores capped in meaning",
+        "earth_spot_usd_vanity is a toy mass*price, not NPV"
+      ]
+    },
+    {
       "designation": "2021 PF7",
       "name": null,
       "spec": null,
@@ -2344,6 +2344,27 @@
       ]
     },
     {
+      "designation": "2026 TP35",
+      "name": null,
+      "spec": null,
+      "spec_family": "unknown",
+      "h_mag": 28.66,
+      "diameter_km": 0.0066,
+      "dv_kms": 12.0,
+      "next_approach": "2026-Oct-11 18:14",
+      "approach_au": 0.00150235071181817,
+      "water_score": 1.1e-05,
+      "pgm_score": 9e-06,
+      "confidence": 0.35,
+      "earth_spot_usd_vanity": 44.82,
+      "notes": [
+        "diameter estimated from H with albedo 0.14",
+        "delta-v missing; penalty dv=12 km/s applied",
+        "spectral class unknown; scores capped in meaning",
+        "earth_spot_usd_vanity is a toy mass*price, not NPV"
+      ]
+    },
+    {
       "designation": "2025 CP1",
       "name": null,
       "spec": null,
@@ -2378,27 +2399,6 @@
       "pgm_score": 6e-06,
       "confidence": 0.35,
       "earth_spot_usd_vanity": 21.26,
-      "notes": [
-        "diameter estimated from H with albedo 0.14",
-        "delta-v missing; penalty dv=12 km/s applied",
-        "spectral class unknown; scores capped in meaning",
-        "earth_spot_usd_vanity is a toy mass*price, not NPV"
-      ]
-    },
-    {
-      "designation": "2026 TL6",
-      "name": null,
-      "spec": null,
-      "spec_family": "unknown",
-      "h_mag": 29.546,
-      "diameter_km": 0.0044,
-      "dv_kms": 12.0,
-      "next_approach": "2026-Oct-10 05:40",
-      "approach_au": 0.00167596584816207,
-      "water_score": 6e-06,
-      "pgm_score": 5e-06,
-      "confidence": 0.35,
-      "earth_spot_usd_vanity": 13.18,
       "notes": [
         "diameter estimated from H with albedo 0.14",
         "delta-v missing; penalty dv=12 km/s applied",
