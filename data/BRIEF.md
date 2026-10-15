@@ -1,6 +1,6 @@
-# Dyson One brief — 2026-10-14T16:46:13Z
+# Dyson One brief — 2026-10-15T16:31:59Z
 
-schema v1 · objects **120** · `43703ba0e00b5830`
+schema v1 · objects **120** · `fd3ccd888ff7ab04`
 
 Scores are research ranks, not mine plans. `earth_spot_usd_vanity` is a toy number.
 
@@ -32,12 +32,12 @@ Scores are research ranks, not mine plans. `earth_spot_usd_vanity` is a toy numb
 | 16 | 2002 LW | unknown | 7.777 | — | 0.000422 | 0.000338 | 0.45 |
 | 17 | 2018 NE1 | unknown | 12.0 | 2026-Nov-19 02:16 | 0.000404 | 0.000323 | 0.35 |
 | 18 | 613862 | unknown | 5.579 | — | 0.000354 | 0.000283 | 0.45 |
-| 19 | 613400 | unknown | 6.0 | — | 0.000343 | 0.000274 | 0.45 |
-| 20 | 2003 EZ16 | unknown | 7.632 | — | 0.000323 | 0.000259 | 0.45 |
-| 21 | 2026 TM67 | unknown | 12.0 | 2026-Oct-20 10:18 | 0.000322 | 0.000258 | 0.35 |
-| 22 | 2026 TB8 | unknown | 12.0 | 2026-Oct-25 09:27 | 0.000283 | 0.000226 | 0.35 |
-| 23 | 450237 | unknown | 7.113 | — | 0.000263 | 0.00021 | 0.45 |
-| 24 | 2026 TS | unknown | 12.0 | 2026-Oct-18 06:16 | 0.000259 | 0.000207 | 0.35 |
-| 25 | 2026 TP | unknown | 12.0 | 2026-Oct-20 09:24 | 0.000231 | 0.000185 | 0.35 |
+| 19 | 2026 TB84 | unknown | 12.0 | 2026-Nov-20 02:23 | 0.000347 | 0.000277 | 0.35 |
+| 20 | 613400 | unknown | 6.0 | — | 0.000343 | 0.000274 | 0.45 |
+| 21 | 2003 EZ16 | unknown | 7.632 | — | 0.000323 | 0.000259 | 0.45 |
+| 22 | 2026 TM67 | unknown | 12.0 | 2026-Oct-20 10:18 | 0.000322 | 0.000258 | 0.35 |
+| 23 | 2026 TB8 | unknown | 12.0 | 2026-Oct-25 09:27 | 0.000283 | 0.000226 | 0.35 |
+| 24 | 450237 | unknown | 7.113 | — | 0.000263 | 0.00021 | 0.45 |
+| 25 | 2026 TS | unknown | 12.0 | 2026-Oct-18 06:16 | 0.000259 | 0.000207 | 0.35 |
 
 Start at `AGENT.md`. Constitution in `CHARTER.md`. No actuators.
