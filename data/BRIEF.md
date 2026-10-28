@@ -1,6 +1,6 @@
-# Dyson One brief — 2026-10-27T17:40:58Z
+# Dyson One brief — 2026-10-28T18:02:09Z
 
-schema v1 · objects **120** · `938aa588113e009c`
+schema v1 · objects **120** · `3618f62245510f07`
 
 Scores are research ranks, not mine plans. `earth_spot_usd_vanity` is a toy number.
 
