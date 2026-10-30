@@ -1,6 +1,6 @@
-# Dyson One brief — 2026-10-29T18:11:28Z
+# Dyson One brief — 2026-10-30T17:49:24Z
 
-schema v1 · objects **120** · `2953f447701e63c6`
+schema v1 · objects **120** · `044ad4770948b60c`
 
 Scores are research ranks, not mine plans. `earth_spot_usd_vanity` is a toy number.
 
@@ -25,7 +25,7 @@ Scores are research ranks, not mine plans. `earth_spot_usd_vanity` is a toy numb
 | 9 | 535844 | unknown | 12.0 | 2027-Mar-04 20:59 | 0.001147 | 0.000918 | 0.35 |
 | 10 | 2024 RR14 | unknown | 12.0 | 2027-Jan-13 19:24 | 0.001049 | 0.000839 | 0.35 |
 | 11 | 2015 DG200 | unknown | 12.0 | 2027-Jan-22 12:01 | 0.00087 | 0.000696 | 0.35 |
-| 12 | 2017 WJ2 | unknown | 12.0 | 2026-Nov-05 04:22 | 0.000807 | 0.000645 | 0.35 |
+| 12 | 2017 WJ2 | unknown | 12.0 | 2026-Nov-05 01:14 | 0.000807 | 0.000645 | 0.35 |
 | 13 | 363305 | unknown | 7.97 | — | 0.000797 | 0.000638 | 0.45 |
 | 14 | 2020 XC3 | unknown | 12.0 | 2026-Dec-08 00:44 | 0.000727 | 0.000582 | 0.35 |
 | 15 | 433303 | unknown | 6.681 | — | 0.00059 | 0.000472 | 0.45 |
@@ -38,6 +38,6 @@ Scores are research ranks, not mine plans. `earth_spot_usd_vanity` is a toy numb
 | 22 | 613400 | unknown | 6.0 | — | 0.000343 | 0.000274 | 0.45 |
 | 23 | 2003 EZ16 | unknown | 7.632 | — | 0.000323 | 0.000259 | 0.45 |
 | 24 | 450237 | unknown | 7.113 | — | 0.000263 | 0.00021 | 0.45 |
-| 25 | 2000 AE205 | unknown | 7.696 | — | 0.000226 | 0.000181 | 0.45 |
+| 25 | 2026 HT | unknown | 12.0 | 2027-Mar-14 00:39 | 0.000234 | 0.000187 | 0.35 |
 
 Start at `AGENT.md`. Constitution in `CHARTER.md`. No actuators.
