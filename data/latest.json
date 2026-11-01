@@ -2,9 +2,9 @@
   "schema_version": 1,
   "project": "dyson-one",
   "charter": "observe-and-rank",
-  "generated_at": "2026-10-31T16:58:47Z",
+  "generated_at": "2026-11-01T17:44:51Z",
   "count": 120,
-  "hash": "a21556a39cedede9",
+  "hash": "314350c848e1315d",
   "budgets": {
     "http_timeout_s": 45,
     "nhats_limit": 60,
@@ -118,7 +118,7 @@
       "diameter_km": 0.277,
       "dv_kms": 12.0,
       "next_approach": "2026-Nov-02 19:10",
-      "approach_au": 0.0402310350688734,
+      "approach_au": 0.0402310409087608,
       "water_score": 0.002916,
       "pgm_score": 0.002332,
       "confidence": 0.35,
@@ -282,7 +282,7 @@
       "diameter_km": 0.1176,
       "dv_kms": 12.0,
       "next_approach": "2026-Nov-05 01:14",
-      "approach_au": 0.0377396629078451,
+      "approach_au": 0.0377394593905357,
       "water_score": 0.000807,
       "pgm_score": 0.000645,
       "confidence": 0.35,
@@ -2176,6 +2176,27 @@
       ]
     },
     {
+      "designation": "2026 FW12",
+      "name": null,
+      "spec": null,
+      "spec_family": "unknown",
+      "h_mag": 27.19,
+      "diameter_km": 0.013,
+      "dv_kms": 12.0,
+      "next_approach": "2027-Mar-17 00:34",
+      "approach_au": 0.0124839410638281,
+      "water_score": 2.9e-05,
+      "pgm_score": 2.4e-05,
+      "confidence": 0.35,
+      "earth_spot_usd_vanity": 341.59,
+      "notes": [
+        "diameter estimated from H with albedo 0.14",
+        "delta-v missing; penalty dv=12 km/s applied",
+        "spectral class unknown; scores capped in meaning",
+        "earth_spot_usd_vanity is a toy mass*price, not NPV"
+      ]
+    },
+    {
       "designation": "2017 DS37",
       "name": null,
       "spec": null,
@@ -2378,27 +2399,6 @@
       "pgm_score": 4e-06,
       "confidence": 0.35,
       "earth_spot_usd_vanity": 11.26,
-      "notes": [
-        "diameter estimated from H with albedo 0.14",
-        "delta-v missing; penalty dv=12 km/s applied",
-        "spectral class unknown; scores capped in meaning",
-        "earth_spot_usd_vanity is a toy mass*price, not NPV"
-      ]
-    },
-    {
-      "designation": "2025 UK9",
-      "name": null,
-      "spec": null,
-      "spec_family": "unknown",
-      "h_mag": 29.83,
-      "diameter_km": 0.0038,
-      "dv_kms": 12.0,
-      "next_approach": "2026-Oct-31 02:35",
-      "approach_au": 0.0021032915876806,
-      "water_score": 5e-06,
-      "pgm_score": 4e-06,
-      "confidence": 0.35,
-      "earth_spot_usd_vanity": 8.9,
       "notes": [
         "diameter estimated from H with albedo 0.14",
         "delta-v missing; penalty dv=12 km/s applied",
