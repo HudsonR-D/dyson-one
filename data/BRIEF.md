@@ -1,6 +1,6 @@
-# Dyson One brief — 2026-11-12T19:40:18Z
+# Dyson One brief — 2026-11-13T19:21:51Z
 
-schema v1 · objects **120** · `2b067befd4b779e2`
+schema v1 · objects **120** · `4b430baae530ad08`
 
 Scores are research ranks, not mine plans. `earth_spot_usd_vanity` is a toy number.
 
@@ -31,9 +31,9 @@ Scores are research ranks, not mine plans. `earth_spot_usd_vanity` is a toy numb
 | 15 | 613862 | unknown | 5.579 | — | 0.000354 | 0.000283 | 0.45 |
 | 16 | 2012 VF46 | unknown | 12.0 | 2026-Nov-18 06:49 | 0.000352 | 0.000282 | 0.35 |
 | 17 | 613400 | unknown | 6.0 | — | 0.000343 | 0.000274 | 0.45 |
-| 18 | 2026 TB84 | unknown | 12.0 | 2026-Nov-19 22:20 | 0.000334 | 0.000267 | 0.35 |
+| 18 | 2026 TB84 | unknown | 12.0 | 2026-Nov-19 22:20 | 0.000335 | 0.000268 | 0.35 |
 | 19 | 2003 EZ16 | unknown | 7.632 | — | 0.000323 | 0.000259 | 0.45 |
-| 20 | 2026 VQ5 | unknown | 12.0 | 2026-Nov-25 21:01 | 0.000306 | 0.000245 | 0.35 |
+| 20 | 2026 VQ5 | unknown | 12.0 | 2026-Nov-25 21:14 | 0.000275 | 0.00022 | 0.35 |
 | 21 | 450237 | unknown | 7.113 | — | 0.000263 | 0.00021 | 0.45 |
 | 22 | 2026 VV5 | unknown | 12.0 | 2026-Nov-13 09:11 | 0.000227 | 0.000182 | 0.35 |
 | 23 | 2000 AE205 | unknown | 7.696 | — | 0.000226 | 0.000181 | 0.45 |
