@@ -1,13 +1,13 @@
-# Dyson One brief — 2026-11-16T21:45:10Z
+# Dyson One brief — 2026-11-17T20:36:03Z
 
-schema v1 · objects **120** · `334dffe8d395e6d3`
+schema v1 · objects **119** · `946b14a8df4a72f8`
 
 Scores are research ranks, not mine plans. `earth_spot_usd_vanity` is a toy number.
 
 ## Attention (spend the next lookup here)
 
 - unknown_low_dv: 2000 SG344, 2006 BZ147, 2009 HC, 2007 CS5, 2010 JK1, 2009 UY19, 2009 BW2, 2007 YF
-- missing_approach: 1997 YM9, 2000 AE205, 2000 AG6, 2000 SG344, 2000 UK11, 2001 AV43, 2001 CQ36, 2001 VE2
+- missing_approach: 2000 AE205, 2000 AG6, 2000 SG344, 2000 UK11, 2001 AV43, 2001 CQ36, 2001 VE2, 2002 LW
 - high_water: 99942, 2016 NV, 474158, 341843, 2020 OP3, 2009 UY19, 535844, 2024 RR14
 
 ## Rank
